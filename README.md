@@ -95,4 +95,55 @@ public class Facturas_Productos
     public Facturas? _Factura { get; set; }
     public Productos? _Producto { get; set; }
 }
-------------------------------------------------------------------------    
+------------------------------------------------------------------------
+// See https://aka.ms/new-console-template for more information
+Console.WriteLine("Hello, world");
+var Lista_estudiantes=new List<Estudiantes>();
+Lista_estudiantes.Add(new Estudiantes() { Id = 1, Carnet = "101", Nombre = "Sofia", Fecha = DateTime.Now, Carrera = "Desarrollo" });
+Lista_estudiantes.Add(new Estudiantes() { Id = 2, Carnet = "102", Nombre = "Pedro", Fecha = DateTime.Now, Carrera = "Ingenieria" });
+Lista_estudiantes.Add(new Estudiantes() { Id = 3, Carnet = "103", Nombre = "Marcela", Fecha = DateTime.Now, Carrera = "Contabilidad" });
+var Lista_profesores=new List<Profesores>();
+Lista_profesores.Add(new Profesores() { Id = 1, Codigo = "1020", Nombre = "Juan", Correo = "abc@gmail.com", Numcontrato = "123" });
+Lista_profesores.Add(new Profesores() { Id = 2, Codigo = "1021", Nombre = "Carlos", Correo = "def@gmail.com", Numcontrato = "124" });
+Lista_profesores.Add(new Profesores() { Id = 3, Codigo = "1022", Nombre = "Ana", Correo = "bit@gmail.com", Numcontrato = "125" });
+Lista_profesores.Add(new Profesores() { Id = 4, Codigo = "1023", Nombre = "Rodolfo", Correo = "got@gmail.com", Numcontrato = "126" });
+var Lista_profesores_estudiantes = new List<ProfesoresEstudiantes>();
+Lista_profesores_estudiantes.Add(new ProfesoresEstudiantes() { Id = 1, Profesor = 1, Estudiante = 1 });
+Lista_profesores_estudiantes.Add(new ProfesoresEstudiantes() { Id = 2, Profesor = 1, Estudiante = 2, _Profesor = Lista_profesores[0], _Estudiante= Lista_estudiantes[1] });
+Lista_profesores_estudiantes.Add(new ProfesoresEstudiantes() { Id = 3, Profesor = 3, Estudiante = 2, _Profesor = Lista_profesores.FirstOrDefault(x => x.Codigo=="1022"), _Estudiante = Lista_estudiantes.FirstOrDefault(x => x.Carnet=="102") });
+Lista_profesores_estudiantes.Add(new ProfesoresEstudiantes() { Id = 4, Profesor = 3, Estudiante = 3 });
+Lista_profesores_estudiantes.Add(new ProfesoresEstudiantes() { Id = 5, Profesor = 2, Estudiante = 1 });
+Lista_profesores_estudiantes.Add(new ProfesoresEstudiantes() { Id = 6, Profesor = 4, Estudiante = 3 });
+foreach (var elemento in Lista_profesores_estudiantes) Console.WriteLine(elemento.Id + elemento.Profesor  + elemento.Estudiante);
+
+
+public class Estudiantes
+{
+    public int Id { get; set; }
+    public string? Carnet { get; set; }
+    public string? Nombre { get; set; }
+    public DateTime? Fecha { get; set; }
+    public string? Carrera { get; set; }
+    public List<ProfesoresEstudiantes>? ProfesoresEstudiantes { get; set; }
+}
+public class Profesores
+{
+    public int Id { get; set; }
+    public string? Codigo { get; set; }
+    public string? Nombre { get; set; }
+    public string? Correo { get; set; }
+    public string? Numcontrato { get; set; }
+    public List<ProfesoresEstudiantes>? ProfesoresEstudiantes { get; set; }
+}
+public class ProfesoresEstudiantes
+{
+    public int Id { get; set; }
+    public int Profesor { get; set; }
+    public int Estudiante { get; set; }
+    public Profesores? _Profesor { get; set; }
+    public Estudiantes? _Estudiante { get; set; }
+}
+// Herencia e interfaces
+public class Abuelos { };
+public class Padres : Abuelos { };
+public class Hijos : Padres { };
